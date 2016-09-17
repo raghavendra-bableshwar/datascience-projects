@@ -1,0 +1,157 @@
+Determine the sentiment of each tweet:
+Top 10:
+18.0: RT @JamesArthur23: Here's 5 happy birthdays.. Happy birthday happy birthday happy birthday happy birthday happy birthday.  https://t.co/5dk…
+15.0: Happy happy birthday @Dana_Coz! Hope you're having an amazing day! Much love from the Philippines ?????????? https://t.co/InLeAgiYta
+13.0: Now abide, faith, hope, love, these three, but the greatest is Love. 1 Cor 13:13 https://t.co/ad2JBDMzGt #jesus
+13.0: RT @ItzAceP: I love lakers but I feel warriors let them win to end on a somewhat happy note lol
+12.0: RT @abing44: Do u believe in love Do u believe in love We used to be in love we used to be in love  @LycanthropeSA
+12.0: RT @echemadubuike: DO NOT SLEEP ON A GOOD GIRL DO NOT SLEEP ON A GOOD GIRL DO NOT SLEEP ON A GOOD GIRL DO NOT SLEEP ON A GOOD GIRL DO NOT S…
+12.0: RT @xxbrygxx: RETWEET TO WIN! WINNER ANNOUNCED IN A FEW MINUTES! #WIN #GIVEAWAY #GlobalGoodEmiCares https://t.co/Uh6CXdsV8j
+11.0: @LittleMix I love them! I am very proud of what they have accomplished, you might wish me a happy birthday? In March is my birthday! ???? -49
+11.0: MorganLovely: Im a sweet girl with bright blue eyes, blonde hair and a big smile. I hope to make it the best e... https://t.co/r2UAn68RIT
+11.0: @Battlefield thanks I can connect to it on my phone and that's fine with me thanks for your help there guys great game keep it up
+
+Bottom 10:
+-12.0: 14 Dead And Dozens Injured In 'Terror' Attack In Aleppo City: Report: At least fourteen civilians were killed ... https://t.co/FtqSnw8UAV
+-12.0: RT @soniaalxo: Just one bitch don't feel the same no more and henny don't really kill the pain no more
+-12.0: RT @_4evaStr8: When a bitch don't like you they link up w|other bitches that don't like you??
+-13.0: RT @CorraCarlo: How the hell did we lets this utter moron become PM? His father was bad for our country, he will be even worse!!! https://t…
+-13.0: @steloudean @DavidWhitDennis - YOU WANNA TALK THAT SHIT - YOU #MOTHER_FUCKER - #PUSSY_PUNK - TAKE YOUR #WHITE_TRASH ASS BACK TO GERMANY #POS
+-13.0: RT @JoeyFotoFr: #DonaldTrump is a blowhard &amp; a fool #TedCruz is the real shit and I do mean shit He represents the worst the GOP has on off…
+-17.0: These little dick ass niggas be talking out they ass, sheesh
+-17.0: hoegan don't talk around my back you slut, go suck some dick @ me you bitch
+-19.0: HOLY FUCKING SHIT YES! THUNDERSNOW! FUCK YES FUCK YES FUCK YES FUCK YES!
+-20.0: RT @sIimcurls: i hate when bitches say "we don't like eachother" no bitch, you don't like me.. i don't give a fuck about you.
+
+Happiest Breaking Bad actor:
+2.080808080808081: Krystenritter
+2.01: mrbobodenkirk
+1.797979797979798: quiethandfilms
+1.6666666666666667: aaronpaul_8
+1.5876288659793814: RjMitte
+1.56: deanjnorris
+1.5151515151515151: CharlesEbaker
+1.41: betsy_brandt
+1.402061855670103: DanielMoncada80
+1.3298969072164948: LuisMoncada77
+1.21: BryanCranston
+-0.010416666666666666: mattjonesisdead
+
+Happiest State:
+Top 5:
+4.0: ME
+3.2: DE
+3.0: MN
+2.3333333333333335: ID
+2.25: AL
+
+Bottom 5:
+-0.8: IN
+-0.8571428571428571: OK
+-1.0: UT
+-1.0: OR
+-2.0: NM
+
+The below functions are common to happiest_state_rbable2.py, happiest_actor_rbable2.py and tweet_sentiment_rbable2.py. Except main function all other functions are used in computing tweet sentiment score:
+1. main()
+---------
+Above function is the control function which takes the input arguments and call other 
+functions in order to compute the tweet sentiments.
+
+2. processAfinnFile(sent_file)
+-----------------------------
+The above function will take sentiment file AFINN_111.txt as an argument loads the 
+English words and their associated scores in a dictionary which will be referred by 
+other functions to compute sentiment score
+
+3. getMultipleWordSentiments(termsAndScores):
+---------------------------------------------
+This function takes the dictionary (termsAndScores) formed by parsing AFINN-111.txt file as a parameter and extracts all bi and tri word keys and forms a seperate list returns the list which will be used in computing sentiment score in the function computeScore(). The multiple terms are recognized if the key has a space in it then that key is said to have bi or tri words and is added to the result list.
+
+4. computeScore(tweetText,termsAndScores,multipleWordTerm):
+-----------------------------------------------------------
+This function computes the sentiment score of the tweetText using termsAndScores,multipleWordTerm all passed as parameters. termsAndScores is the dictionary formed by parsing AFINN-111.txt file and multipleWordTerm is the list returned by getMultipleWordSentiments function.
+
+Algorithm is as follows:
+------------------------
+convert tweetText to lowercase and remove all occurances of newlines in the tweettext
+remove all punctuation marks on the tweetText using regular expression
+for each term in the multipleWordTerm:
+    if term is present in the tweetText:
+	    add the score of the term to the total score
+		remove that term from the tweetText
+	split tweetText at ' '
+	for each token in split tweetText:
+	    if token exists in termsAndScores key:
+		    add score of token to the total score
+return score
+
+The above algorithm ensures that all bi and tri word sentiments scores are addressed and when we compare the terms in the multipleWordTerm with tweetText and no punctuation marks will affect the scores since all are removed.
+
+Below functions are specific to happiest_state_rbable2.py:
+
+1. processTweetFile(tweetFileName,termsAndScores):
+--------------------------------------------------
+The above function takes the tweet file name which has to be processed along with the 
+dictionary which contains terms and scores returned by function processAfinnFile and returns
+the average sentiment scores for each state.
+
+State can be got in three ways:
+1. Using tweet[user][location]: Since this attribute is not reliable and may or may not contain state name, this code handles in such a way that if state name is present in tweet[user][location] it is counted for sentiment else not.
+2. Using tweet[place]: State can be obtained using this attribute in 2 ways:
+    a. if tweet['place']['place_type'] == 'city' then, tweet['place']['full_name'] contains the abbreviation of the state
+	b. if tweetAsJson['place']['place_type'] == 'admin' then, tweet['place']['full_name'] contains the full state name and its abbreviation is got from an internally maintained dictionary.
+3. Using tweet[coordinates], which will not be used since there is no way to get the state names just based on the co-ordinates wihtout any external aide which is not allowed.
+
+The algorithm for getting tweets' state and scores is as follows:
+(Please note that all other functions used in the below algorithms are explained in their respective algorithms)
+for each tweet in the file streaming_output_full
+    do:
+    load the line using json.loads
+	initialize state with empty string
+	if only the tweet has text and tweet's language is English then:
+	    if the tweet has place attribute and country is US then:
+		    if tweet[place][place_type] attribute is set to city then:
+			    split at ',' and get the second part of the attribute tweet[place][full_name]'s value which is the state's abbreviation.
+			else if tweet[place][place_type] is set to admin then:
+			    split at ',' and get the first part of the attribute tweet[place][full_name]'s value which is the state's fullname and then get state's abbreviation using the stateNamesWithAbbr dictionary
+		if the tweet does not have place attribute then then use tweet[user] attribute:
+		    get the tweet[user][location] string and get the state abbreviation using logic defined in function getStateFromUser()
+		compute the sentiment score using function computeScore()
+		update statesAndScores and statesAndItsFreq dictionaries to calcuate average sentiment scores of each state
+	done:
+	return statesAndScores
+
+2. getStateNamesWithAbbr():
+--------------------------
+This function creates a mapping of full states name with their respective abbriviations and returns the dictionary containing this mapping
+
+3. getStateFromUser(stateNamesWithAbbr, line):
+----------------------------------------------
+This function takes stateNamesWithAbbr returned by getStateNamesWithAbbr() function and the line got from the tweet[user][location] as paramters. It converts the line parameter to lower case and checks against each keys of the dictionary stateNamesWithAbbr whether any of the state is contained in the line parameter. If present then return the abbreviation of the state otherwise None.
+
+Below functions are specific to happiest_actor_rbable2.py:
+1. processCSVFile(csv_file,termsAndScores):
+-------------------------------------------
+This function parses the csv file containing username and tweets of breaking bad actors. It takes csv_file as a parameter which is the filename of breaking bad actor's tweets and termsAndScores a dictionary which contains terms and scores returned by function processAfinnFile and returns the actors with their score dictinoary.
+Algorithm as follows:
+for each entry in the csv file:
+    extract username and tweet from the line by splitting at ','
+	compute score of tweetText using function computeScore()
+	add scores to the dict actorsAndScores
+compute average of each tweet of the user
+return actorsAndScores 
+
+Below functions are specific to tweet_sentiment_rbable2.py:
+1. processTweetFile(tweetFileName,termsAndScores):
+--------------------------------------------------
+The above function takes the tweet file name which has to be processed along with the 
+dictionary which contains terms and scores returned by function processAfinnFile and returns
+the average sentiment scores for each tweet.
+
+Algroithm goes as follows:
+for each entry in the tweet file:
+    load entry as json object
+	compute the sentiment score using function computeScore()
+	update scoresAndTweets dict which stores scores and list of tweets
+return scoresAndTweets

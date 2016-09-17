@@ -1,0 +1,71 @@
+Search term: #SuperBowl
+Some example tweets:
+GOOD EVENING NAIJA \\nGo Follow @olorijagabanofficial \\n#fashion #DabOnEm #abs\\n-\\n-\\n#Dabbin #Panthers #superbowl #super\\u2026 https:\\/\\/t.co\\/aZEwpdRLBm
+Love thy team #superbowl #broncosbong #broncos #superbowl2016 #bong #flower #420 #blazeup #smoke #puff #cannalife #\\u2026 https:\\/\\/t.co\\/1PHWkPCG9y
+#NFL #MVP #AaronRodgers #Packers 2015 Donruss Gridiron Kings #280 (3H) https:\\/\\/t.co\\/47F29GSWf3 #SuperBowl #Forsale https:\\/\\/t.co\\/HtwTkRBLX8
+#SuperBowl TIX \\ud83c\\udfc8https:\\/\\/t.co\\/MxISwVOJyQ \\ud83c\\udfc8- Get Your #Playoff #Tickets For Denver #Broncos. #NFL #Ticket #Football\\u2026 https:\\/\\/t.co\\/cOWFeEpuR3
+TIX \\ud83c\\udfc8https:\\/\\/t.co\\/ke7quNRAwA \\ud83c\\udfc8- Watch #Broncos Bringing A #SuperBowl Title To Denver in 2016 #NFL #Ticket #Tickets\\u2026 https:\\/\\/t.co\\/5VQ8Sn1j2o
+New #Adorable #BlueIvy Pictures Are Here! ... #Beyonce #Beyhive #SuperBowl  https:\\/\\/t.co\\/oHVswCIwHo
+
+Compute term frequency:
+rt 0.05993988459597622
+kca 0.005353342548103293
+im 0.0051339432633449615
+like 0.004739024550779965
+get 0.004607384979924966
+amp 0.004036946839553303
+dont 0.0038394874832708044
+love 0.003773667697843305
+go 0.0034665086991816406
+one 0.0030715899866166434
+time 0.0030715899866166434
+new 0.002874130630334145
+people 0.0028302507733824786
+https… 0.0026986112025274797
+know 0.0025230917747208143
+back 0.0024792119177691483
+u 0.002325632418438316
+weather 0.0022378727045349834
+day 0.00221593277605915
+good 0.00221593277605915
+never 0.002106233133679984
+lets 0.0020184734197766516
+life 0.0020184734197766516
+cant 0.0020184734197766516
+need 0.001996533491300818
+youre 0.001974593562824985
+want 0.001952653634349152
+see 0.001930713705873319
+best 0.0018429539919699862
+got 0.0018429539919699862
+
+The term frequency calcuation is divided into four modules:
+
+1. processStopWordFile(stopWordFileName):
+-----------------------------------------
+This function takes the stopword file name as parameter and adds the stopwords to
+the list which will be used to remove stopwords from being included in calculating term
+frequencies.
+
+2. processTweetFile(tweetFileName):
+-----------------------------------
+This function takes tweet file name as a parameter and parses in the following way
+
+convert tweetText into lower case
+remove all the punctuation marks from the tweetText
+tokenize the tweetText using split function at space
+increment the count for each token in the tweetText
+
+3. computeFrequency(stopWordList,termsWithCount):
+------------------------------------------------
+This function takes stopWordlist and termsWithCount dict as parameters and computes frequency of each term
+
+Algorithm is as follows:
+foreach entry in termsWithCount:
+    if it contains stopWords:
+	    delete that word from termsWithCount
+compute sum of all terms' occurances
+for each term in termsWithCount:
+    divide each term occurance with the total sum of all term occurances computed in previous step
+	and store in termsWithCount
+return termsWithCount
