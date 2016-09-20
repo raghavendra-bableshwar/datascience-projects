@@ -1,4 +1,5 @@
 Please download test and train data from the link given below:
+
 http://cs.stanford.edu/people/alecmgo/trainingandtestdata.zip
 
 Format 
@@ -14,5 +15,6 @@ The data used for this project was slightly modified. The entries with
 polarity value = 2 are removed and the tweets with polarity value = 4 are
 converted to value = 1 and then processed
 
-Read the index.html file under html folder to see what all are done in this 
-project.
+Go through the document
+https://raghu4690.bitbucket.io/dataScience/Twitter_Sentiment_Classification_using_Apache_Spark/
+to find detailed explanation of the project.
