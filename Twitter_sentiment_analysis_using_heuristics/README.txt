@@ -11,7 +11,9 @@ and then perform following operations on the extracted tweets:
    Refer processAfinnFile, getMultipleWordSentiments, computeScore in tweet_sentiment.py for
    code and reportb.txt for their details.
 3. Determine happiest breaking bad actors: In this operation, recent 100 tweets from
-   8 breaking bad actors namely (BryanCranston, aaronpaul_8, RjMitte, deanjnorris, betsy_brandt, mrbobodenkirk, quiethandfilms, abqjoker, mattjonesisdead, CharlesEbaker, DanielMoncada80, LuisMoncada77, Krystenritter) are extracted and the sentiments of their tweets are determined
+   8 breaking bad actors namely (BryanCranston, aaronpaul_8, RjMitte, deanjnorris, betsy_brandt,
+   mrbobodenkirk, quiethandfilms, abqjoker, mattjonesisdead, CharlesEbaker, DanielMoncada80,
+   LuisMoncada77, Krystenritter) are extracted and the sentiments of their tweets are determined
    and ordered in ascending orders. 
 4. Determine happiest state: The tweets fetched in the inital step will contain the information
    regarding their authors and location. This information is what exploited in this section.
