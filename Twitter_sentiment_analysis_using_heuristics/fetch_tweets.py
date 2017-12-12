@@ -6,11 +6,11 @@ import sys
 import csv
 
 # See Assignment 1 instructions for how to get these credentials
-access_token_key = "1961093533-HByGN5hPAzYyCHgwFNTMkpI9wTf0zZ0phD91nsX"
-access_token_secret = "yvs0DhhA2hQ9ap42EO6NulplZ62vRWgFu75P9xgcokKoB"
+access_token_key = ""
+access_token_secret = ""
 
-consumer_key = "YOHiEKfo6Xu0MdusfnLyjzPmb"
-consumer_secret = "li7lCTf41maDxBR7uS4El347eS3SLqDBAHE5XaTfVbEXeOBo03"
+consumer_key = ""
+consumer_secret = ""
 
 _debug = 0
 
